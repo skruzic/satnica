@@ -1,20 +1,33 @@
 import { useFormik } from "formik";
-import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import * as Yup from "yup";
 
 const SubjectForm = ({ open, onClose, onSubmit }) => {
   const formik = useFormik({
-    initialValues: { name: "", type: "", hoursCount: 0, groupsCount: 0 },
+    initialValues: {
+      name: "",
+      type: "",
+      hours: 0,
+      groups: 0,
+      students: 0,
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required("Obavezno polje"),
+      type: Yup.string().max(2).required("Obavezno polje"),
+      hours: Yup.number().required("Obavezno polje"),
+      groups: Yup.number().required("Obavezno polje"),
+      students: Yup.number().required("Obavezno polje"),
+    }),
     onSubmit: (values) => {
       onSubmit(values);
-      alert(JSON.stringify(values, null, 2));
+      //alert(JSON.stringify(values, null, 2));
     },
   });
 
@@ -23,7 +36,7 @@ const SubjectForm = ({ open, onClose, onSubmit }) => {
       <DialogTitle>TEST</DialogTitle>
       <DialogContent>
         <form onSubmit={formik.handleSubmit}>
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
                 fullWidth
@@ -54,9 +67,9 @@ const SubjectForm = ({ open, onClose, onSubmit }) => {
               <TextField
                 fullWidth
                 type="number"
-                name="hoursCount"
-                //label="Broj sati"
-                value={formik.values.hoursCount}
+                name="hours"
+                label="Broj sati"
+                value={formik.values.hours}
                 onChange={formik.handleChange}
               />
             </Grid>
@@ -64,9 +77,19 @@ const SubjectForm = ({ open, onClose, onSubmit }) => {
               <TextField
                 fullWidth
                 type="number"
-                name="groupsCount"
-                //label="Broj sati"
-                value={formik.values.groupsCount}
+                name="groups"
+                label="Broj mojih grupa"
+                value={formik.values.groups}
+                onChange={formik.handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                type="number"
+                name="students"
+                label="Broj studenata po grupi"
+                value={formik.values.students}
                 onChange={formik.handleChange}
               />
             </Grid>
