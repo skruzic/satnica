@@ -4,6 +4,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
@@ -27,6 +29,7 @@ const SubjectForm = ({ open, onClose, onSubmit }) => {
     }),
     onSubmit: (values) => {
       onSubmit(values);
+      onClose();
       //alert(JSON.stringify(values, null, 2));
     },
   });
@@ -47,21 +50,25 @@ const SubjectForm = ({ open, onClose, onSubmit }) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Select
-                fullWidth
-                name="type"
-                displayEmpty
-                value={formik.values.type}
-                onChange={formik.handleChange}
-              >
-                <MenuItem disabled selected>
-                  <em>Odaberi...</em>
-                </MenuItem>
-                <MenuItem value="P">Predavanja</MenuItem>
-                <MenuItem value="S">Seminari</MenuItem>
-                <MenuItem value="AV">Auditorne vježbe</MenuItem>
-                <MenuItem value="LV">Laboratorijske vježbe</MenuItem>
-              </Select>
+              <FormControl fullWidth>
+                <InputLabel id="type-select-label">Vrsta nastave</InputLabel>
+                <Select
+                  labelId="type-select-label"
+                  label="Vrsta nastave"
+                  name="type"
+                  displayEmpty
+                  value={formik.values.type}
+                  onChange={formik.handleChange}
+                >
+                  <MenuItem disabled selected>
+                    <em>Odaberi...</em>
+                  </MenuItem>
+                  <MenuItem value="P">Predavanja</MenuItem>
+                  <MenuItem value="S">Seminari</MenuItem>
+                  <MenuItem value="AV">Auditorne vježbe</MenuItem>
+                  <MenuItem value="LV">Laboratorijske vježbe</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
               <TextField
