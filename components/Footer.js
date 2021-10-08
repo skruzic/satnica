@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 
 const Copyright = () => (
   <Typography variant="body2" color="text.secondary">
-    {"Copyright © 2020"}
+    {"Copyright © 2021"}
   </Typography>
 );
 

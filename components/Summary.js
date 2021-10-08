@@ -15,7 +15,8 @@ import {
   rnri,
 } from "../utils/calculations";
 
-const Summary = ({ data, target }) => {
+const Summary = ({ data, target, mentor }) => {
+  console.log(mentor);
   return (
     <Card>
       <TableContainer component={CardContent}>
@@ -79,7 +80,11 @@ const Summary = ({ data, target }) => {
                 Prekovremeni rad
               </TableCell>
               <TableCell>
-                {(computeTotalWorkHours(data) - rnri(data, target)).toFixed(2)}
+                {(
+                  computeTotalWorkHours(data) +
+                  mentor -
+                  rnri(data, target)
+                ).toFixed(2)}
               </TableCell>
             </TableRow>
           </TableFooter>

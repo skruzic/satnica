@@ -16,6 +16,7 @@ export default function Home() {
   const [formOpen, setFormOpen] = useState(false);
   const [data, setData] = useState([]);
   const [target, setTarget] = useState(405);
+  const [mentor, setMentor] = useState(false);
 
   const handleFormSubmit = (values) => {
     setData([...data, values]);
@@ -23,6 +24,10 @@ export default function Home() {
 
   const handleTargetChange = (e) => {
     setTarget(parseInt(e.target.value));
+  };
+
+  const handleMentorChange = (e) => {
+    setMentor(e.target.checked);
   };
 
   return (
@@ -39,17 +44,27 @@ export default function Home() {
           Izračun satnice
         </Typography>
 
-        <Person hours={target} onBlur={handleTargetChange} />
+        <Person
+          hours={target}
+          onHoursChange={handleTargetChange}
+          mentor={mentor}
+          onMentorChange={handleMentorChange}
+        />
 
-        {data.length > 0 && <Summary data={data} target={target} />}
+        <Box sx={{ my: 2 }}>
+          <Button
+            variant="contained"
+            onClick={() => setFormOpen(true)}
+            startIcon={<AddIcon />}
+          >
+            Dodaj predmet
+          </Button>
+        </Box>
 
-        <Button
-          variant="contained"
-          onClick={() => setFormOpen(true)}
-          startIcon={<AddIcon />}
-        >
-          Dodaj predmet
-        </Button>
+        {data.length > 0 && (
+          <Summary data={data} target={target} mentor={+mentor * 96} />
+        )}
+
         <SubjectForm
           open={formOpen}
           onClose={() => setFormOpen(false)}
