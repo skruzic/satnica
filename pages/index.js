@@ -22,6 +22,12 @@ export default function Home() {
     setData([...data, values]);
   };
 
+  const handleDeleteItem = (index) => {
+    const newData = [...data];
+    newData.splice(index, 1);
+    setData(newData);
+  };
+
   const handleTargetChange = (e) => {
     setTarget(parseInt(e.target.value));
   };
@@ -62,7 +68,12 @@ export default function Home() {
         </Box>
 
         {data.length > 0 && (
-          <Summary data={data} target={target} mentor={+mentor * 96} />
+          <Summary
+            data={data}
+            target={target}
+            mentor={+mentor * 96}
+            onDeleteItem={handleDeleteItem}
+          />
         )}
 
         <SubjectForm

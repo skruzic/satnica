@@ -8,6 +8,8 @@ import TableFooter from "@mui/material/TableFooter";
 import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   computeWorkHours,
   computeTotalWorkHours,
@@ -15,8 +17,7 @@ import {
   rnri,
 } from "../utils/calculations";
 
-const Summary = ({ data, target, mentor }) => {
-  console.log(mentor);
+const Summary = ({ data, target, mentor, onDeleteItem }) => {
   return (
     <Card>
       <TableContainer component={CardContent}>
@@ -29,6 +30,7 @@ const Summary = ({ data, target, mentor }) => {
               <TableCell>Broj mojih grupa</TableCell>
               <TableCell>Broj studenata u grupa</TableCell>
               <TableCell>Ukupno radnih sati</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -47,36 +49,41 @@ const Summary = ({ data, target, mentor }) => {
                     row.students
                   ).toFixed(1)}
                 </TableCell>
+                <TableCell>
+                  <IconButton onClick={() => onDeleteItem(idx)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={5} align="right">
+              <TableCell colSpan={6} align="right">
                 Ukupno sati
               </TableCell>
               <TableCell>{computeTotalWorkHours(data).toFixed(1)}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell colSpan={5} align="right">
+              <TableCell colSpan={6} align="right">
                 Udio nerepetitivne nastave
               </TableCell>
               <TableCell>{nonRepetitive(data).toFixed(2)}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell colSpan={5} align="right">
+              <TableCell colSpan={6} align="right">
                 Udio repetitivne nastave
               </TableCell>
               <TableCell>{(1 - nonRepetitive(data)).toFixed(2)}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell colSpan={5} align="right">
+              <TableCell colSpan={6} align="right">
                 RNRI
               </TableCell>
               <TableCell>{rnri(data).toFixed(2)}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell colSpan={5} align="right">
+              <TableCell colSpan={6} align="right">
                 Prekovremeni rad
               </TableCell>
               <TableCell>
