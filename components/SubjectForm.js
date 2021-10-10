@@ -27,9 +27,10 @@ const SubjectForm = ({ open, onClose, onSubmit }) => {
       groups: Yup.number().required("Obavezno polje"),
       students: Yup.number().required("Obavezno polje"),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       onSubmit(values);
       onClose();
+      resetForm();
       //alert(JSON.stringify(values, null, 2));
     },
   });
