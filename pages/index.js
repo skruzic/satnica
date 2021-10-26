@@ -29,7 +29,11 @@ export default function Home() {
   };
 
   const handleTargetChange = (e) => {
-    setTarget(parseInt(e.target.value));
+    if (e.target.value == false) {
+      setTarget(0);
+    } else {
+      setTarget(parseInt(e.target.value));
+    }
   };
 
   const handleMentorChange = (e) => {

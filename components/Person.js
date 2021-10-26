@@ -17,6 +17,7 @@ const Person = ({ hours, mentor, onHoursChange, onMentorChange }) => {
           InputLabelProps={{ shrink: true }}
           value={hours}
           onChange={onHoursChange}
+          inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         />
       </Box>
       <Box sx={{ mt: 1, mb: 1 }}>

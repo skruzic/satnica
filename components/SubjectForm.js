@@ -37,7 +37,7 @@ const SubjectForm = ({ open, onClose, onSubmit }) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>TEST</DialogTitle>
+      <DialogTitle>Novi predmet</DialogTitle>
       <DialogContent>
         <form onSubmit={formik.handleSubmit}>
           <Grid container spacing={3}>
@@ -48,6 +48,7 @@ const SubjectForm = ({ open, onClose, onSubmit }) => {
                 label="Naziv predmeta"
                 value={formik.values.name}
                 onChange={formik.handleChange}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12}>
