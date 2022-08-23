@@ -1,10 +1,10 @@
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 const Copyright = () => (
   <Typography variant="body2" color="text.secondary">
-    {"Copyright © 2021"}
+    Copyright © {new Date().getFullYear()}
   </Typography>
 );
 
@@ -14,9 +14,9 @@ const Footer = () => (
     sx={{
       py: 3,
       px: 2,
-      mt: "auto",
+      mt: 'auto',
       backgroundColor: (theme) =>
-        theme.palette.mode === "light"
+        theme.palette.mode === 'light'
           ? theme.palette.grey[200]
           : theme.palette.grey[800],
     }}
