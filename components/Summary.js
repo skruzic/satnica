@@ -1,21 +1,21 @@
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TableFooter from "@mui/material/TableFooter";
-import Paper from "@mui/material/Paper";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableFooter from '@mui/material/TableFooter';
+import Paper from '@mui/material/Paper';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
   computeWorkHours,
   computeTotalWorkHours,
   nonRepetitive,
   rnri,
-} from "../utils/calculations";
+} from '../utils/calculations';
 
 const Summary = ({ data, target, mentor, onDeleteItem }) => {
   return (
@@ -28,7 +28,8 @@ const Summary = ({ data, target, mentor, onDeleteItem }) => {
               <TableCell>Vrsta nastave</TableCell>
               <TableCell>Broj sati</TableCell>
               <TableCell>Broj mojih grupa</TableCell>
-              <TableCell>Broj studenata u grupa</TableCell>
+              <TableCell>Broj studenata u grupi</TableCell>
+              <TableCell>Postotak nastave</TableCell>
               <TableCell>Ukupno radnih sati</TableCell>
               <TableCell></TableCell>
             </TableRow>
@@ -41,13 +42,15 @@ const Summary = ({ data, target, mentor, onDeleteItem }) => {
                 <TableCell>{row.hours}</TableCell>
                 <TableCell>{row.groups}</TableCell>
                 <TableCell>{row.students}</TableCell>
+                <TableCell>{row.scale * 100}%</TableCell>
                 <TableCell>
                   {computeWorkHours(
                     row.type,
                     row.hours,
                     row.groups,
-                    row.students
-                  ).toFixed(1)}
+                    row.students,
+                    row.scale
+                  ).toFixed(2)}
                 </TableCell>
                 <TableCell>
                   <IconButton onClick={() => onDeleteItem(idx)}>

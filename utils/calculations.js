@@ -1,9 +1,9 @@
-export const computeWorkHours = (type, hours, groups, students) => {
+export const computeWorkHours = (type, hours, groups, students, scale) => {
   let NR = 0,
     RR = 0;
 
   switch (type) {
-    case "P":
+    case 'P':
       if (students <= 5) {
         NR = 1.6;
         RR = 1.1;
@@ -21,7 +21,7 @@ export const computeWorkHours = (type, hours, groups, students) => {
         RR = 2.4;
       }
       break;
-    case "S":
+    case 'S':
       if (students <= 5) {
         NR = 1.2;
         RR = 0.9;
@@ -33,7 +33,7 @@ export const computeWorkHours = (type, hours, groups, students) => {
         RR = 1.7;
       }
       break;
-    case "AV":
+    case 'AV':
       if (students <= 5) {
         NR = 0.8;
         RR = 0.7;
@@ -45,7 +45,7 @@ export const computeWorkHours = (type, hours, groups, students) => {
         RR = 1.3;
       }
       break;
-    case "LV":
+    case 'LV':
       if (students <= 5) {
         NR = 0.8;
         RR = 0.7;
@@ -58,13 +58,20 @@ export const computeWorkHours = (type, hours, groups, students) => {
       break;
   }
 
-  return 13 * hours * ((groups - 1) * RR + NR);
+  return 13 * hours * ((groups - 1) * RR + NR) * scale;
 };
 
 export const computeTotalWorkHours = (data) => {
   return data.reduce(
     (acc, item) =>
-      acc + computeWorkHours(item.type, item.hours, item.groups, item.students),
+      acc +
+      computeWorkHours(
+        item.type,
+        item.hours,
+        item.groups,
+        item.students,
+        item.scale
+      ),
     0
   );
 };

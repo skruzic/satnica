@@ -1,31 +1,33 @@
-import { useFormik } from "formik";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
-import * as Yup from "yup";
+import { useFormik } from 'formik';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
+import * as Yup from 'yup';
 
 const SubjectForm = ({ open, onClose, onSubmit }) => {
   const formik = useFormik({
     initialValues: {
-      name: "",
-      type: "",
+      name: '',
+      type: '',
       hours: 0,
       groups: 0,
       students: 0,
+      scale: 1,
     },
     validationSchema: Yup.object({
-      name: Yup.string().required("Obavezno polje"),
-      type: Yup.string().max(2).required("Obavezno polje"),
-      hours: Yup.number().required("Obavezno polje"),
-      groups: Yup.number().required("Obavezno polje"),
-      students: Yup.number().required("Obavezno polje"),
+      name: Yup.string().required('Obavezno polje'),
+      type: Yup.string().max(2).required('Obavezno polje'),
+      hours: Yup.number().required('Obavezno polje'),
+      groups: Yup.number().required('Obavezno polje'),
+      students: Yup.number().required('Obavezno polje'),
+      scale: Yup.number(),
     }),
     onSubmit: (values, { resetForm }) => {
       onSubmit(values);
@@ -100,6 +102,17 @@ const SubjectForm = ({ open, onClose, onSubmit }) => {
                 label="Broj studenata po grupi"
                 value={formik.values.students}
                 onChange={formik.handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                //type="number"
+                name="scale"
+                label="Faktor skaliranja"
+                value={formik.values.scale}
+                onChange={formik.handleChange}
+                helperText="Udio nastave ako nastavnik drži manje od 100% nastave"
               />
             </Grid>
             <Grid item xs={12}>
