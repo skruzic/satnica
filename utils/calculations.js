@@ -40,7 +40,7 @@ export const computeWorkHours = (type, hours, groups, students, scale) => {
       } else if (students > 5 && students <= 9) {
         NR = 1.2;
         RR = 1.0;
-      } else if (students >= 10 && students <= 59) {
+      } else if (students >= 10) {
         NR = 1.6;
         RR = 1.3;
       }

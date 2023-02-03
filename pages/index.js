@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -11,25 +11,41 @@ import Summary from '../components/Summary';
 import Footer from '../components/Footer';
 import Person from '../components/Person';
 import AddIcon from '@mui/icons-material/Add';
+import useStorage from '../store/store';
 
 export default function Home() {
   const [formOpen, setFormOpen] = useState(false);
+  const stateData = useStorage((state) => state.data);
+  const setStateData = useStorage((state) => state.updateData);
+  const stateTarget = useStorage((state) => state.target);
+  const setStateTarget = useStorage((state) => state.updateTarget);
   const [data, setData] = useState([]);
   const [target, setTarget] = useState('405');
   const [mentor, setMentor] = useState(false);
 
+  useEffect(() => {
+    setData(stateData);
+  }, [stateData]);
+
+  useEffect(() => {
+    setTarget(stateTarget);
+  }, [stateTarget]);
+
   const handleFormSubmit = (values) => {
-    setData([...data, values]);
+    //setData([...data, values]);
+    setStateData([...data, values]);
   };
 
   const handleDeleteItem = (index) => {
     const newData = [...data];
     newData.splice(index, 1);
-    setData(newData);
+    //setData(newData);
+    setStateData(newData);
   };
 
   const handleTargetChange = (e) => {
-    setTarget(e.target.value);
+    //setTarget(e.target.value);
+    setStateTarget(e.target.value);
   };
 
   const handleMentorChange = (e) => {

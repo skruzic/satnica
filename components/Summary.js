@@ -42,7 +42,7 @@ const Summary = ({ data, target, mentor, onDeleteItem }) => {
                 <TableCell>{row.hours}</TableCell>
                 <TableCell>{row.groups}</TableCell>
                 <TableCell>{row.students}</TableCell>
-                <TableCell>{row.scale * 100}%</TableCell>
+                <TableCell>{(row.scale * 100).toFixed(2)}%</TableCell>
                 <TableCell>
                   {computeWorkHours(
                     row.type,
