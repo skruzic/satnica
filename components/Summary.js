@@ -66,7 +66,7 @@ const Summary = ({ data, target, mentor, onDeleteItem }) => {
                 Ukupno sati
               </TableCell>
               <TableCell align="right">
-                {computeTotalWorkHours(data).toFixed(1)}
+                {computeTotalWorkHours(data).toFixed(2)}
               </TableCell>
             </TableRow>
             <TableRow>
