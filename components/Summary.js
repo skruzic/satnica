@@ -65,31 +65,37 @@ const Summary = ({ data, target, mentor, onDeleteItem }) => {
               <TableCell colSpan={6} align="right">
                 Ukupno sati
               </TableCell>
-              <TableCell>{computeTotalWorkHours(data).toFixed(1)}</TableCell>
+              <TableCell align="right">
+                {computeTotalWorkHours(data).toFixed(1)}
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell colSpan={6} align="right">
                 Udio nerepetitivne nastave
               </TableCell>
-              <TableCell>{nonRepetitive(data).toFixed(2)}</TableCell>
+              <TableCell align="right">
+                {nonRepetitive(data).toFixed(2)}
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell colSpan={6} align="right">
                 Udio repetitivne nastave
               </TableCell>
-              <TableCell>{(1 - nonRepetitive(data)).toFixed(2)}</TableCell>
+              <TableCell align="right">
+                {(1 - nonRepetitive(data)).toFixed(2)}
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell colSpan={6} align="right">
                 RNRI
               </TableCell>
-              <TableCell>{rnri(data).toFixed(2)}</TableCell>
+              <TableCell align="right">{rnri(data).toFixed(2)}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell colSpan={6} align="right">
                 Prekovremeni rad
               </TableCell>
-              <TableCell>
+              <TableCell align="right">
                 {(
                   computeTotalWorkHours(data) +
                   mentor -
