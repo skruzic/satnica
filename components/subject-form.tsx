@@ -1,3 +1,5 @@
+'use client';
+
 import { useFormik } from 'formik';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -8,7 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
+import { Button } from '@/components/ui/button';
 import * as Yup from 'yup';
 
 interface SubjectFormProps {
@@ -126,9 +128,7 @@ const SubjectForm: React.FC<SubjectFormProps> = ({
               />
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" color="primary" type="submit">
-                Sačuvaj
-              </Button>
+              <Button type="submit">Sačuvaj</Button>
             </Grid>
           </Grid>
         </form>

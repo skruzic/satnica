@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import { Button } from '@/components/ui/button';
 import SubjectForm from '../components/subject-form';
 import Summary from '../components/summary';
 import Footer from '../components/footer';
@@ -57,11 +57,8 @@ export default function Home() {
         />
 
         <Box sx={{ my: 2 }}>
-          <Button
-            variant="contained"
-            onClick={() => setFormOpen(true)}
-            startIcon={<AddIcon />}
-          >
+          <Button onClick={() => setFormOpen(true)}>
+            <AddIcon className="mr-2 h-4 w-4" />
             Dodaj predmet
           </Button>
         </Box>

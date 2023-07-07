@@ -1,3 +1,5 @@
+'use client';
+
 import Box from '@mui/material/Box';
 import { FormControlLabel } from '@mui/material';
 import TextField from '@mui/material/TextField';
