@@ -33,7 +33,7 @@ const formSchema = z.object({
   hours: z.coerce.number(),
   groups: z.coerce.number(),
   students: z.coerce.number(),
-  scale: z.coerce.number(),
+  scale: z.coerce.number().gte(0).lte(1),
 });
 
 const CourseModal = () => {
@@ -117,7 +117,11 @@ const CourseModal = () => {
                     <FormItem>
                       <FormLabel>Broj sati</FormLabel>
                       <FormControl>
-                        <Input placeholder="Broj sati" {...field} />
+                        <Input
+                          type="number"
+                          placeholder="Broj sati"
+                          {...field}
+                        />
                       </FormControl>
                       <FormDescription>
                         Tjedni broj sati za odabranu vrstu nastave
@@ -133,7 +137,11 @@ const CourseModal = () => {
                     <FormItem>
                       <FormLabel>Broj grupa</FormLabel>
                       <FormControl>
-                        <Input placeholder="Broj grupa" {...field} />
+                        <Input
+                          type="number"
+                          placeholder="Broj grupa"
+                          {...field}
+                        />
                       </FormControl>
                       <FormDescription>
                         Broj grupa za odabranu vrstu nastave
@@ -169,7 +177,14 @@ const CourseModal = () => {
                     <FormItem>
                       <FormLabel>Faktor skaliranja</FormLabel>
                       <FormControl>
-                        <Input placeholder="Broj između 0 i 1" {...field} />
+                        <Input
+                          type="number"
+                          min={0}
+                          max={1}
+                          step={0.01}
+                          placeholder="Broj između 0 i 1"
+                          {...field}
+                        />
                       </FormControl>
                       <FormDescription>
                         Udio nastave ako nastavnik drži manje od 100% nastave

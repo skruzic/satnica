@@ -1,23 +1,14 @@
 'use client';
 
-/*import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableFooter from '@mui/material/TableFooter';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import IconButton from '@mui/material/IconButton';*/
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Trash } from 'lucide-react';
+
+import { Course } from '@/types';
 import {
   computeWorkHours,
   computeTotalWorkHours,
   nonRepetitive,
   rnri,
-} from '../utils/calculations';
-import { Course } from '@/types';
+} from '@/utils/calculations';
 import {
   Table,
   TableBody,
@@ -27,8 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Button } from './ui/button';
-import { Trash } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface SummaryProps {
   courses: Course[];
@@ -86,6 +76,12 @@ const Summary: React.FC<SummaryProps> = ({
             </TableCell>
           </TableRow>
         ))}
+        {mentor > 0 && (
+          <TableRow>
+            <TableCell colSpan={6}>Mentorski rad</TableCell>
+            <TableCell colSpan={2}>96.00</TableCell>
+          </TableRow>
+        )}
       </TableBody>
       <TableFooter>
         <TableRow>
@@ -93,7 +89,7 @@ const Summary: React.FC<SummaryProps> = ({
             Ukupno sati
           </TableCell>
           <TableCell align="right">
-            {computeTotalWorkHours(courses).toFixed(2)}
+            {(computeTotalWorkHours(courses) + mentor).toFixed(2)}
           </TableCell>
           <TableCell />
         </TableRow>

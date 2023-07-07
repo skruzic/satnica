@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Plus } from 'lucide-react';
 
 import CourseModal from '@/components/modals/course-modal';
@@ -9,8 +10,11 @@ import Person from '@/components/person';
 import { useStorage } from '@/hooks/use-storage';
 import { Button } from '@/components/ui/button';
 import { useCourseModal } from '@/hooks/use-course-modal';
+import { Separator } from '@/components/ui/separator';
 
 export default function Home() {
+  const [isMounted, setIsMounted] = useState(false);
+
   const courseModal = useCourseModal();
 
   const courses = useStorage((state) => state.courses);
@@ -25,12 +29,20 @@ export default function Home() {
     setTarget(Number(e.target.value));
   };
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col h-full">
       <main className="container mt-8 mb-2">
         <h1 className="text-5xl mb-10">Izračun satnice</h1>
 
-        <p>
+        <p className="my-4">
           Aplikacija za izračun radnih sati prema odluci Fakultetskog vijeća
           FESB-a.{' '}
           <span className="font-semibold">Ovo nije službeni izračun.</span>{' '}
