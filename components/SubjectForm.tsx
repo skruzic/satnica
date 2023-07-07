@@ -11,7 +11,17 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import * as Yup from 'yup';
 
-const SubjectForm = ({ open, onClose, onSubmit }) => {
+interface SubjectFormProps {
+  open: boolean;
+  onClose: () => void;
+  onSubmit: (values: any) => void;
+}
+
+const SubjectForm: React.FC<SubjectFormProps> = ({
+  open,
+  onClose,
+  onSubmit,
+}) => {
   const formik = useFormik({
     initialValues: {
       name: '',

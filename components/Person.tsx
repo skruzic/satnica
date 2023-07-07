@@ -2,8 +2,21 @@ import Box from '@mui/material/Box';
 import { FormControlLabel } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
+import React from 'react';
 
-const Person = ({ hours, mentor, onHoursChange, onMentorChange }) => {
+interface PersonProps {
+  hours: any;
+  mentor: any;
+  onHoursChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onMentorChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Person: React.FC<PersonProps> = ({
+  hours,
+  mentor,
+  onHoursChange,
+  onMentorChange,
+}) => {
   return (
     <>
       <Box sx={{ mt: 5, mb: 2 }}>

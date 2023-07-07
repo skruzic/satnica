@@ -17,7 +17,19 @@ import {
   rnri,
 } from '../utils/calculations';
 
-const Summary = ({ data, target, mentor, onDeleteItem }) => {
+interface SummaryProps {
+  data: any;
+  target: number;
+  mentor: number;
+  onDeleteItem: (idx: number) => void;
+}
+
+const Summary: React.FC<SummaryProps> = ({
+  data,
+  target,
+  mentor,
+  onDeleteItem,
+}) => {
   return (
     <Card>
       <TableContainer component={CardContent}>

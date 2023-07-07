@@ -1,8 +1,15 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+interface useStorageStore {
+  data: any;
+  target: number;
+  updateData: (data: any) => void;
+  updateTarget: (target: number) => void;
+}
+
 const useStorage = create(
-  persist(
+  persist<useStorageStore>(
     (set, get) => ({
       data: [],
       target: 0,
