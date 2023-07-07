@@ -1,51 +1,33 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import SubjectForm from '../components/SubjectForm';
-import Summary from '../components/Summary';
-import Footer from '../components/Footer';
-import Person from '../components/Person';
+import SubjectForm from '../components/subject-form';
+import Summary from '../components/summary';
+import Footer from '../components/footer';
+import Person from '../components/person';
 import AddIcon from '@mui/icons-material/Add';
-import useStorage from '../store/store';
+import useStorage from '../hooks/use-storage';
 
 export default function Home() {
   const [formOpen, setFormOpen] = useState(false);
-  const stateData = useStorage((state) => state.data);
-  const setStateData = useStorage((state) => state.updateData);
-  const stateTarget = useStorage((state) => state.target);
-  const setStateTarget = useStorage((state) => state.updateTarget);
-  const [data, setData] = useState([]);
-  const [target, setTarget] = useState('405');
+  const courses = useStorage((state) => state.courses);
+  const addCourse = useStorage((state) => state.addCourse);
+  const removeCourse = useStorage((state) => state.removeCourse);
+  const target = useStorage((state) => state.target);
+  const setTarget = useStorage((state) => state.updateTarget);
   const [mentor, setMentor] = useState(false);
 
-  useEffect(() => {
-    setData(stateData);
-  }, [stateData]);
+  const handleFormSubmit = (values) => addCourse(values);
 
-  useEffect(() => {
-    setTarget(stateTarget);
-  }, [stateTarget]);
-
-  const handleFormSubmit = (values) => {
-    //setData([...data, values]);
-    setStateData([...data, values]);
-  };
-
-  const handleDeleteItem = (index) => {
-    const newData = [...data];
-    newData.splice(index, 1);
-    //setData(newData);
-    setStateData(newData);
-  };
+  const handleDeleteItem = (id) => removeCourse(id);
 
   const handleTargetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //setTarget(e.target.value);
-    setStateTarget(e.target.value);
+    setTarget(Number(e.target.value));
   };
 
   const handleMentorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,10 +66,10 @@ export default function Home() {
           </Button>
         </Box>
 
-        {data.length > 0 && (
+        {courses.length > 0 && (
           <Summary
-            data={data}
-            target={parseFloat(target)}
+            data={courses}
+            target={target}
             mentor={+mentor * 96}
             onDeleteItem={handleDeleteItem}
           />

@@ -5,7 +5,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
-import Paper from '@mui/material/Paper';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import IconButton from '@mui/material/IconButton';
@@ -16,12 +15,13 @@ import {
   nonRepetitive,
   rnri,
 } from '../utils/calculations';
+import { Course } from '@/types';
 
 interface SummaryProps {
-  data: any;
+  data: Course[];
   target: number;
   mentor: number;
-  onDeleteItem: (idx: number) => void;
+  onDeleteItem: (idx: string) => void;
 }
 
 const Summary: React.FC<SummaryProps> = ({
@@ -47,8 +47,8 @@ const Summary: React.FC<SummaryProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row, idx) => (
-              <TableRow key={idx}>
+            {data.map((row: Course) => (
+              <TableRow key={row.id}>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.type}</TableCell>
                 <TableCell>{row.hours}</TableCell>
@@ -65,7 +65,7 @@ const Summary: React.FC<SummaryProps> = ({
                   ).toFixed(2)}
                 </TableCell>
                 <TableCell>
-                  <IconButton onClick={() => onDeleteItem(idx)}>
+                  <IconButton onClick={() => onDeleteItem(row.id)}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
