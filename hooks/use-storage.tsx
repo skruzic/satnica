@@ -7,16 +7,19 @@ import { Course } from '@/types';
 interface useStorageStore {
   courses: Course[];
   target: number;
+  mentor: boolean;
   updateTarget: (target: number) => void;
   addCourse: (data: Course) => void;
   removeCourse: (id: string) => void;
+  toggleMentor: () => void;
 }
 
-const useStorage = create(
+export const useStorage = create(
   persist<useStorageStore>(
     (set, get) => ({
       courses: [],
       target: 405,
+      mentor: false,
       updateTarget: (params) => set({ target: params }),
       addCourse: (data) =>
         set({ courses: [...get().courses, { id: uuidv4(), ...data }] }),
@@ -24,6 +27,7 @@ const useStorage = create(
         set({
           courses: [...get().courses.filter((course) => course.id !== id)],
         }),
+      toggleMentor: () => set({ mentor: !get().mentor }),
     }),
     {
       name: 'storage',
@@ -31,5 +35,3 @@ const useStorage = create(
     }
   )
 );
-
-export default useStorage;

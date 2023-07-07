@@ -1,33 +1,14 @@
 'use client';
 
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-
-const Copyright = () => (
-  <Typography variant="body2" color="text.secondary">
-    Copyright © {new Date().getFullYear()}
-  </Typography>
-);
-
 const Footer = () => (
-  <Box
-    component="footer"
-    sx={{
-      py: 3,
-      px: 2,
-      mt: 'auto',
-      backgroundColor: (theme) =>
-        theme.palette.mode === 'light'
-          ? theme.palette.grey[200]
-          : theme.palette.grey[800],
-    }}
-  >
-    <Container>
-      <Typography>Koristite na vlastitu odgovornost</Typography>
-      <Copyright />
-    </Container>
-  </Box>
+  <footer className="px-2 py-3 mt-auto bg-gray-200">
+    <div className="container">
+      <p className="text-sm">Koristite na vlastitu odgovornost</p>
+      <p className="text-sm text-muted-foreground">
+        Copyright &copy; {new Date().getFullYear()}
+      </p>
+    </div>
+  </footer>
 );
 
 export default Footer;

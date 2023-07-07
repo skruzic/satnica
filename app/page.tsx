@@ -1,28 +1,23 @@
 'use client';
 
-import { useState } from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { Plus } from 'lucide-react';
+
+import CourseModal from '@/components/modals/course-modal';
+import Summary from '@/components/summary';
+import Footer from '@/components/footer';
+import Person from '@/components/person';
+import { useStorage } from '@/hooks/use-storage';
 import { Button } from '@/components/ui/button';
-import SubjectForm from '../components/subject-form';
-import Summary from '../components/summary';
-import Footer from '../components/footer';
-import Person from '../components/person';
-import AddIcon from '@mui/icons-material/Add';
-import useStorage from '../hooks/use-storage';
+import { useCourseModal } from '@/hooks/use-course-modal';
 
 export default function Home() {
-  const [formOpen, setFormOpen] = useState(false);
+  const courseModal = useCourseModal();
+
   const courses = useStorage((state) => state.courses);
-  const addCourse = useStorage((state) => state.addCourse);
   const removeCourse = useStorage((state) => state.removeCourse);
   const target = useStorage((state) => state.target);
   const setTarget = useStorage((state) => state.updateTarget);
-  const [mentor, setMentor] = useState(false);
-
-  const handleFormSubmit = (values) => addCourse(values);
+  const mentor = useStorage((state) => state.mentor);
 
   const handleDeleteItem = (id) => removeCourse(id);
 
@@ -30,55 +25,39 @@ export default function Home() {
     setTarget(Number(e.target.value));
   };
 
-  const handleMentorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMentor(e.target.checked);
-  };
-
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <CssBaseline />
+    <div className="flex flex-col h-full">
+      <main className="container mt-8 mb-2">
+        <h1 className="text-5xl mb-10">Izračun satnice</h1>
 
-      <Container component="main" sx={{ mt: 8, mb: 2 }}>
-        <Typography variant="h2" component="h1">
-          Izračun satnice
-        </Typography>
-
-        <Typography>
+        <p>
           Aplikacija za izračun radnih sati prema odluci Fakultetskog vijeća
-          FESB-a. <strong>Ovo nije službeni izračun.</strong> Koristite na
-          vlastitu odgovornost.
-        </Typography>
+          FESB-a.{' '}
+          <span className="font-semibold">Ovo nije službeni izračun.</span>{' '}
+          Koristite na vlastitu odgovornost.
+        </p>
 
-        <Person
-          hours={target}
-          onHoursChange={handleTargetChange}
-          mentor={mentor}
-          onMentorChange={handleMentorChange}
-        />
+        <Person hours={target} onHoursChange={handleTargetChange} />
 
-        <Box sx={{ my: 2 }}>
-          <Button onClick={() => setFormOpen(true)}>
-            <AddIcon className="mr-2 h-4 w-4" />
+        <div className="my-2">
+          <Button onClick={courseModal.onOpen}>
+            <Plus className="mr-2 h-4 w-4" />
             Dodaj predmet
           </Button>
-        </Box>
+        </div>
 
         {courses.length > 0 && (
           <Summary
-            data={courses}
+            courses={courses}
             target={target}
             mentor={+mentor * 96}
             onDeleteItem={handleDeleteItem}
           />
         )}
 
-        <SubjectForm
-          open={formOpen}
-          onClose={() => setFormOpen(false)}
-          onSubmit={handleFormSubmit}
-        />
-      </Container>
+        <CourseModal />
+      </main>
       <Footer />
-    </Box>
+    </div>
   );
 }
