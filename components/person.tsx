@@ -20,7 +20,7 @@ interface PersonProps {
 const Person: React.FC<PersonProps> = ({ hours, onHoursChange }) => {
   const { mentor, toggleMentor } = useStorage();
   return (
-    <Card className="max-w-lg">
+    <Card className="max-w-lg my-4">
       <CardHeader>
         <CardTitle>Postavke izračuna</CardTitle>
         <CardDescription>

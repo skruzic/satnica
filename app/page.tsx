@@ -15,8 +15,6 @@ import { Separator } from '@/components/ui/separator';
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
 
-  const courseModal = useCourseModal();
-
   const courses = useStorage((state) => state.courses);
   const removeCourse = useStorage((state) => state.removeCourse);
   const target = useStorage((state) => state.target);
@@ -51,21 +49,12 @@ export default function Home() {
 
         <Person hours={target} onHoursChange={handleTargetChange} />
 
-        <div className="my-2">
-          <Button onClick={courseModal.onOpen}>
-            <Plus className="mr-2 h-4 w-4" />
-            Dodaj predmet
-          </Button>
-        </div>
-
-        {courses.length > 0 && (
-          <Summary
-            courses={courses}
-            target={target}
-            mentor={+mentor * 96}
-            onDeleteItem={handleDeleteItem}
-          />
-        )}
+        <Summary
+          courses={courses}
+          target={target}
+          mentor={+mentor * 96}
+          onDeleteItem={handleDeleteItem}
+        />
 
         <CourseModal />
       </main>
