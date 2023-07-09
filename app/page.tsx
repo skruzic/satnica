@@ -47,7 +47,8 @@ export default function Home() {
           Koristite na vlastitu odgovornost.
         </p>
 
-        <Person hours={target} onHoursChange={handleTargetChange} />
+        {/*<Person hours={target} onHoursChange={handleTargetChange} />*/}
+        <Person hours={target} onHoursChange={setTarget} />
 
         <Summary
           courses={courses}
