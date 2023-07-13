@@ -1,6 +1,6 @@
 'use client';
 
-import { Plus, Trash } from 'lucide-react';
+import { Plus, Trash, Edit } from 'lucide-react';
 
 import { Course } from '@/types';
 import {
@@ -27,6 +27,12 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { useCourseModal } from '@/hooks/use-course-modal';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from './ui/tooltip';
 
 interface SummaryProps {
   courses: Course[];
@@ -89,13 +95,39 @@ const Summary: React.FC<SummaryProps> = ({
                     ).toFixed(2)}
                   </TableCell>
                   <TableCell>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      onClick={() => onDeleteItem(row.id)}
-                    >
-                      <Trash className="h-4 w-4" />
-                    </Button>
+                    {/*<TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => {}}
+                            className="mr-2"
+                          >
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Uredi</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>*/}
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="destructive"
+                            size="icon"
+                            onClick={() => onDeleteItem(row.id)}
+                          >
+                            <Trash className="h-4 w-4" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Izbriši</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </TableCell>
                 </TableRow>
               ))}
