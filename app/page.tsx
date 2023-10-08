@@ -1,15 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Plus } from 'lucide-react';
 
 import Summary from '@/components/summary';
 import Footer from '@/components/footer';
 import Person from '@/components/person';
 import { useStorage } from '@/hooks/use-storage';
-import { Button } from '@/components/ui/button';
-import { useCourseModal } from '@/hooks/use-course-modal';
-import { Separator } from '@/components/ui/separator';
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
@@ -21,10 +17,6 @@ export default function Home() {
   const mentor = useStorage((state) => state.mentor);
 
   const handleDeleteItem = (id) => removeCourse(id);
-
-  const handleTargetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTarget(Number(e.target.value));
-  };
 
   useEffect(() => {
     setIsMounted(true);
