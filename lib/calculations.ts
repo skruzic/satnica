@@ -1,4 +1,12 @@
-export const computeWorkHours = (type, hours, groups, students, scale) => {
+import { Course } from '@/types';
+
+export const computeWorkHours = (
+  type: string,
+  hours: number,
+  groups: number,
+  students: number,
+  scale: number
+) => {
   let NR = 0,
     RR = 0;
 
@@ -61,7 +69,7 @@ export const computeWorkHours = (type, hours, groups, students, scale) => {
   return 13 * hours * ((groups - 1) * RR + NR) * scale;
 };
 
-export const computeTotalWorkHours = (data) => {
+export const computeTotalWorkHours = (data: Course[]) => {
   return data.reduce(
     (acc, item) =>
       acc +
@@ -76,14 +84,14 @@ export const computeTotalWorkHours = (data) => {
   );
 };
 
-export const rnri = (data, target = 405) => {
+export const rnri = (data: Course[], target = 405) => {
   return (
     nonRepetitive(data) * 0.6 * target +
     (1 - nonRepetitive(data)) * 0.5 * target
   );
 };
 
-export const nonRepetitive = (data) => {
+export const nonRepetitive = (data: Course[]) => {
   let nrp = 0;
 
   const total = data.reduce((acc, item) => {
@@ -97,7 +105,7 @@ export const nonRepetitive = (data) => {
   }, 0);
 
   if (total !== 0) {
-    return parseFloat(nrp / total);
+    return nrp / total;
   } else {
     return 1.0;
   }
