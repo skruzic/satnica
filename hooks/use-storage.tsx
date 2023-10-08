@@ -10,6 +10,7 @@ interface useStorageStore {
   mentor: boolean;
   updateTarget: (target: number) => void;
   addCourse: (data: Course) => void;
+  editCourse: (data: Course) => void;
   removeCourse: (id: string) => void;
   toggleMentor: () => void;
 }
@@ -23,6 +24,14 @@ export const useStorage = create(
       updateTarget: (params) => set({ target: params }),
       addCourse: (data) =>
         set({ courses: [...get().courses, { id: uuidv4(), ...data }] }),
+      editCourse: (data) => {
+        set({
+          courses: [
+            ...get().courses.filter((course) => course.id !== data.id),
+            data,
+          ],
+        });
+      },
       removeCourse: (id: string) =>
         set({
           courses: [...get().courses.filter((course) => course.id !== id)],

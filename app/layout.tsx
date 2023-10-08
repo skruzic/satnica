@@ -1,5 +1,7 @@
 import { Inter } from 'next/font/google';
 
+import { ModalProvider } from '@/components/providers/modal-provider';
+
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin-ext'] });
@@ -17,7 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ModalProvider />
+        {children}
+      </body>
     </html>
   );
 }

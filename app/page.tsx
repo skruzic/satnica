@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { Plus } from 'lucide-react';
 
-import CourseModal from '@/components/modals/course-modal';
 import Summary from '@/components/summary';
 import Footer from '@/components/footer';
 import Person from '@/components/person';
@@ -56,8 +55,6 @@ export default function Home() {
           mentor={+mentor * 96}
           onDeleteItem={handleDeleteItem}
         />
-
-        <CourseModal />
       </main>
       <Footer />
     </div>

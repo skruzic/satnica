@@ -26,13 +26,14 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { useCourseModal } from '@/hooks/use-course-modal';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from './ui/tooltip';
+import { ConfirmModal } from './modals/confirm-modal';
+import { ModalType, useModal } from '@/hooks/use-modal-store';
 
 interface SummaryProps {
   courses: Course[];
@@ -47,13 +48,20 @@ const Summary: React.FC<SummaryProps> = ({
   mentor,
   onDeleteItem,
 }) => {
-  const courseModal = useCourseModal();
+  //const courseModal = useCourseModal();
+  const { onOpen } = useModal();
+
+  const onAction = (e: React.MouseEvent, action: ModalType, course: Course) => {
+    e.stopPropagation();
+    onOpen(action, { course });
+  };
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>
           Pregled nastavnog opterećenja
-          <Button className="ml-2" onClick={courseModal.onOpen}>
+          <Button className="ml-2" onClick={() => onOpen('createCourse')}>
             <Plus className="mr-2 h-4 w-4" />
             Dodaj predmet
           </Button>
@@ -95,13 +103,15 @@ const Summary: React.FC<SummaryProps> = ({
                     ).toFixed(2)}
                   </TableCell>
                   <TableCell>
-                    {/*<TooltipProvider>
+                    <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <Button
                             variant="outline"
                             size="icon"
-                            onClick={() => {}}
+                            onClick={() =>
+                              onOpen('editCourse', { course: row })
+                            }
                             className="mr-2"
                           >
                             <Edit className="h-4 w-4" />
@@ -111,17 +121,15 @@ const Summary: React.FC<SummaryProps> = ({
                           <p>Uredi</p>
                         </TooltipContent>
                       </Tooltip>
-                    </TooltipProvider>*/}
+                    </TooltipProvider>
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button
-                            variant="destructive"
-                            size="icon"
-                            onClick={() => onDeleteItem(row.id)}
-                          >
-                            <Trash className="h-4 w-4" />
-                          </Button>
+                          <ConfirmModal onConfirm={() => onDeleteItem(row.id)}>
+                            <Button variant="destructive" size="icon">
+                              <Trash className="h-4 w-4" />
+                            </Button>
+                          </ConfirmModal>
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>Izbriši</p>
