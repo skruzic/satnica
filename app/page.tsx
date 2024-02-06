@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { Plus } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Plus } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import Footer from '@/components/footer';
-import { Heading } from '@/components/heading';
-import Person from '@/components/person';
-import Summary from '@/components/summary';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { useModal } from '@/hooks/use-modal-store';
-import { useStorage } from '@/hooks/use-storage';
+import Footer from "@/components/footer";
+import { Heading } from "@/components/heading";
+import Person from "@/components/person";
+import Summary from "@/components/summary";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { useModal } from "@/hooks/use-modal-store";
+import { useStorage } from "@/hooks/use-storage";
 
-import { columns } from './_components/columns';
-import { DataTable } from './_components/data-table';
+import { columns } from "./_components/columns";
+import { DataTable } from "./_components/data-table";
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
@@ -37,17 +37,17 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full w-full">
       <main className="container mt-8 mb-2">
         <h1 className="text-5xl mb-10">Izračun satnice</h1>
         <p className="my-4">
           Aplikacija za izračun radnih sati prema odluci Fakultetskog vijeća
-          FESB-a.{' '}
-          <span className="font-semibold">Ovo nije službeni izračun.</span>{' '}
+          FESB-a.{" "}
+          <span className="font-semibold">Ovo nije službeni izračun.</span>{" "}
           Koristite na vlastitu odgovornost.
         </p>
         {/*<Person hours={target} onHoursChange={handleTargetChange} />*/}
-        <div className="flex gap-8">
+        <div className="flex flex-col md:flex-row gap-8">
           <Person hours={target} onHoursChange={setTarget} />
 
           <Summary courses={courses} target={target} mentor={+mentor * 96} />
@@ -55,7 +55,7 @@ export default function Home() {
 
         <div className="flex items-center justify-between">
           <Heading title="Pregled nastavnog opterećenja" />
-          <Button onClick={() => onOpen('createCourse')}>
+          <Button onClick={() => onOpen("createCourse")}>
             <Plus className="mr-2 w-4 h-4" />
             Novi predmet
           </Button>
