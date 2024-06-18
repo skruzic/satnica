@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Card,
@@ -6,17 +6,17 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-} from '@/components/ui/table';
-import { ModalType, useModal } from '@/hooks/use-modal-store';
-import { computeTotalWorkHours, nonRepetitive, rnri } from '@/lib/calculations';
-import { Course } from '@/types';
+} from "@/components/ui/table";
+import { ModalType, useModal } from "@/hooks/use-modal-store";
+import { computeTotalWorkHours, nonRepetitive, rnri } from "@/lib/calculations";
+import { Course } from "@/types";
 
 interface SummaryProps {
   courses: Course[];
@@ -67,7 +67,9 @@ const Summary = ({ courses, target, mentor }: SummaryProps) => {
               </TableRow>
               <TableRow>
                 <TableHead>RNRI</TableHead>
-                <TableCell align="right">{rnri(courses).toFixed(2)}</TableCell>
+                <TableCell align="right">
+                  {rnri(courses, target).toFixed(2)}
+                </TableCell>
                 <TableCell />
               </TableRow>
               <TableRow>

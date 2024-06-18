@@ -1,4 +1,4 @@
-import { Course } from '@/types';
+import { Course } from "@/types";
 
 export const computeWorkHours = (
   type: string,
@@ -11,7 +11,7 @@ export const computeWorkHours = (
     RR = 0;
 
   switch (type) {
-    case 'P':
+    case "P":
       if (students <= 5) {
         NR = 1.6;
         RR = 1.1;
@@ -29,7 +29,7 @@ export const computeWorkHours = (
         RR = 2.4;
       }
       break;
-    case 'S':
+    case "S":
       if (students <= 5) {
         NR = 1.2;
         RR = 0.9;
@@ -41,7 +41,7 @@ export const computeWorkHours = (
         RR = 1.7;
       }
       break;
-    case 'AV':
+    case "AV":
       if (students <= 5) {
         NR = 0.8;
         RR = 0.7;
@@ -53,7 +53,7 @@ export const computeWorkHours = (
         RR = 1.3;
       }
       break;
-    case 'LV':
+    case "LV":
       if (students <= 5) {
         NR = 0.8;
         RR = 0.7;
@@ -95,13 +95,14 @@ export const nonRepetitive = (data: Course[]) => {
   let nrp = 0;
 
   const total = data.reduce((acc, item) => {
-    if (item.groups > 1) {
+    /*if (item.groups > 1) {
       nrp += item.hours;
     } else {
       nrp += item.groups * item.hours;
-    }
+    }*/
+    nrp += item.hours * item.scale;
 
-    return acc + item.groups * item.hours;
+    return acc + item.groups * item.hours * item.scale;
   }, 0);
 
   if (total !== 0) {
